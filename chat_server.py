@@ -89,8 +89,7 @@ def transcribe_wav_bytes(wav_bytes: bytes) -> str:
         return result.text.strip()
 
     if result.reason == speechsdk.ResultReason.Canceled:
-        det = speechsdk.CancellationDetails.from_result(result)
-        # Raise so the caller sends the real error to the browser
+        det = result.cancellation_details
         raise RuntimeError(f"Azure ASR cancelled — {det.reason}: {det.error_details}")
 
     # NoMatch: audio reached Azure but no speech detected in it
