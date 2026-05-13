@@ -615,25 +615,29 @@ function showResponse(t) {
 }
 
 // ── Audio capture — ScriptProcessorNode (raw PCM, no WebM involved) ────────
+// VAD settings match the reference script (.env values)
 const SAMPLE_RATE    = 16000;
-const BLOCK_SIZE     = 1024;
-const RMS_THRESH     = 0.008;
-const SILENCE_MS     = 700;
+const BLOCK_SIZE     = 512;    // 32ms per block — finer VAD granularity
+const RMS_THRESH     = 0.003;  // low threshold; works for far-field mirror mics
+const SILENCE_MS     = 700;    // MAYA_VAD_SILENCE_MS
+const PRE_ROLL_MS    = 400;    // MAYA_VAD_PRE_MS — keep audio BEFORE speech onset
 const MAX_SEC        = 20;
-const SILENCE_BLOCKS = Math.ceil(SILENCE_MS / (BLOCK_SIZE / SAMPLE_RATE * 1000));
-const MAX_BLOCKS     = Math.ceil(MAX_SEC    / (BLOCK_SIZE / SAMPLE_RATE));
 
-let gCtx         = null;   // one AudioContext for the whole page lifetime
+const BLOCK_MS       = BLOCK_SIZE / SAMPLE_RATE * 1000;   // ms per block
+const SILENCE_BLOCKS = Math.ceil(SILENCE_MS  / BLOCK_MS);
+const PRE_ROLL_BLOCKS= Math.ceil(PRE_ROLL_MS / BLOCK_MS); // ~12 blocks = 384ms
+const MAX_BLOCKS     = Math.ceil(MAX_SEC * 1000 / BLOCK_MS);
+
+let gCtx         = null;
 let scriptProc   = null;
-let _micStream   = null;   // persistent mic stream — requested once, reused forever
+let _micStream   = null;
 let pcmChunks    = [];
+let preRollBuf   = [];   // ring buffer — stores last PRE_ROLL_BLOCKS before speech
 let hasVoice     = false;
 let silenceCount = 0;
 let totalBlocks  = 0;
 
 // ── AudioContext helpers ────────────────────────────────────────────────────
-// Must be called during a user gesture so Chrome unlocks audio output.
-// Called from onCircleTap(), sendText(), and global interaction listeners.
 function _ensureCtxRunning() {
   if (!gCtx || gCtx.state === 'closed') {
     try { gCtx = new AudioContext({ sampleRate: SAMPLE_RATE }); }
@@ -642,7 +646,6 @@ function _ensureCtxRunning() {
   if (gCtx.state === 'suspended') gCtx.resume().catch(() => {});
 }
 
-// Re-unlock whenever user interacts (handles tab-switch suspension)
 ['click', 'keydown', 'touchstart'].forEach(ev =>
   document.addEventListener(ev, _ensureCtxRunning, { passive: true })
 );
@@ -650,16 +653,19 @@ document.addEventListener('visibilitychange', () => {
   if (!document.hidden) _ensureCtxRunning();
 });
 
-// ── Persistent mic stream — request permission once, keep stream alive ──────
+// ── Persistent mic stream — request once, reuse forever ────────────────────
 async function _getMicStream() {
   if (_micStream) {
     const track = _micStream.getAudioTracks()[0];
-    // readyState 'live' means the track is active; 'ended' means browser killed it
     if (track && track.readyState === 'live') return _micStream;
     _micStream.getTracks().forEach(t => t.stop());
     _micStream = null;
   }
-  _micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+  // autoGainControl normalises far-field / quiet microphones automatically
+  _micStream = await navigator.mediaDevices.getUserMedia({
+    audio: { autoGainControl: true, echoCancellation: true, noiseSuppression: true },
+    video: false,
+  });
   return _micStream;
 }
 
@@ -675,6 +681,7 @@ async function startRecording() {
   }
 
   pcmChunks    = [];
+  preRollBuf   = [];
   hasVoice     = false;
   silenceCount = 0;
   totalBlocks  = 0;
@@ -684,11 +691,10 @@ async function startRecording() {
   response.classList.remove('visible');
   setState(STATES.LISTENING);
 
-  // Always create + resume AudioContext inside this user-gesture call path
   _ensureCtxRunning();
   try { await gCtx.resume(); } catch(_) {}
 
-  const src = gCtx.createMediaStreamSource(stream);
+  const src  = gCtx.createMediaStreamSource(stream);
   scriptProc = gCtx.createScriptProcessor(BLOCK_SIZE, 1, 1);
 
   scriptProc.onaudioprocess = (e) => {
@@ -696,13 +702,28 @@ async function startRecording() {
     const data = e.inputBuffer.getChannelData(0);
     totalBlocks++;
 
+    // RMS energy
     let sum = 0;
     for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
     const rms = Math.sqrt(sum / data.length);
-    levelFill.style.width = Math.min(100, rms * 700) + '%';
+    levelFill.style.width = Math.min(100, rms * 900) + '%';
 
-    if (rms >= RMS_THRESH) { hasVoice = true; silenceCount = 0; }
-    else if (hasVoice)       silenceCount++;
+    if (rms >= RMS_THRESH) {
+      if (!hasVoice) {
+        // Speech onset — flush the pre-roll ring buffer first so we don't
+        // clip the beginning of the utterance (matches MAYA_VAD_PRE_MS=400)
+        hasVoice = true;
+        for (const b of preRollBuf) pcmChunks.push(b);
+        preRollBuf = [];
+      }
+      silenceCount = 0;
+    } else if (hasVoice) {
+      silenceCount++;
+    } else {
+      // Pre-speech: maintain a rolling 400ms buffer
+      preRollBuf.push(new Float32Array(data));
+      if (preRollBuf.length > PRE_ROLL_BLOCKS) preRollBuf.shift();
+    }
 
     if (hasVoice) pcmChunks.push(new Float32Array(data));
 
