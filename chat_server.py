@@ -953,19 +953,34 @@ function handleMessage(evt) {
   }
 }
 
-// ── Server-mic mode (Smart Mirror / Linux — use ?mic=server in URL) ────────
-const SERVER_MIC = new URLSearchParams(location.search).get('mic') === 'server';
+// ── Mic mode — auto-detect Linux, override with ?mic=server or ?mic=browser ─
+// On Linux (Smart Mirror / Debian) Chromium's Web Audio API produces zeros
+// for microphone input, so we use the server's sounddevice instead.
+const _params   = new URLSearchParams(location.search);
+const _isLinux  = /linux/i.test(navigator.userAgent) && !/android/i.test(navigator.userAgent);
+const SERVER_MIC = _params.get('mic') === 'server'  ? true
+                 : _params.get('mic') === 'browser' ? false
+                 : _isLinux;   // auto: Linux → server mic, everything else → browser mic
 
 if (SERVER_MIC) {
-  // Hide the level bar — server handles VAD, not the browser
   document.getElementById('level-bar').style.display = 'none';
-  // Show a small badge so operator knows which mode is active
-  const badge = document.createElement('div');
-  badge.textContent = 'Server mic';
-  badge.style.cssText = 'position:fixed;bottom:80px;right:18px;font-size:0.65rem;'
-    + 'color:rgba(100,180,255,0.4);letter-spacing:0.08em;text-transform:uppercase';
-  document.body.appendChild(badge);
 }
+
+// Small badge (bottom-right) shows which mode is active
+const _badge = document.createElement('div');
+_badge.id    = 'mic-badge';
+_badge.textContent = SERVER_MIC ? '🎙 Server mic' : '🎙 Browser mic';
+_badge.style.cssText =
+  'position:fixed;bottom:76px;right:16px;font-size:0.62rem;'
+  + 'color:rgba(120,180,255,0.35);letter-spacing:0.07em;cursor:pointer;'
+  + 'text-transform:uppercase;';
+_badge.title = 'Click to switch mic mode';
+_badge.onclick = () => {
+  const url = new URL(location.href);
+  url.searchParams.set('mic', SERVER_MIC ? 'browser' : 'server');
+  location.href = url.toString();
+};
+document.body.appendChild(_badge);
 
 // ── Circle tap ─────────────────────────────────────────────────────────────
 function onCircleTap() {
