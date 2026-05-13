@@ -142,7 +142,6 @@ def speak_server_side(text: str) -> None:
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Server-side microphone capture (for Linux / Smart Mirror)
-# Mirrors the reference MAYA script exactly: sounddevice + webrtcvad + pre-roll
 # ─────────────────────────────────────────────────────────────────────────────
 
 _VAD_RATE           = int(os.environ.get("MAYA_VOICE_SAMPLE_RATE", "16000"))
@@ -152,50 +151,62 @@ _VAD_SILENCE_MS     = int(os.environ.get("MAYA_VAD_SILENCE_MS",     "700"))
 _VAD_PRE_MS         = int(os.environ.get("MAYA_VAD_PRE_MS",         "400"))
 _VAD_MAX_MS         = int(os.environ.get("MAYA_VAD_MAX_UTTERANCE_MS","20000"))
 
-# One global stop-event so the browser tap can abort an in-progress recording
+# Optional: set MAYA_MIC_DEVICE to a device index or name substring
+# Run GET /api/audio-devices to list what's available on the mirror
+_MIC_DEVICE: int | str | None = None
+_raw = os.environ.get("MAYA_MIC_DEVICE", "").strip()
+if _raw:
+    _MIC_DEVICE = int(_raw) if _raw.isdigit() else _raw
+
 _server_mic_stop = threading.Event()
+_server_mic_rms  = 0.0   # updated every frame; read by async level-update loop
 
 
 def capture_server_mic() -> bytes:
-    """Record from the server's microphone using webrtcvad.
-
-    Identical logic to the reference MAYA script. Returns WAV bytes.
-    Blocks until end-of-speech is detected or max duration reached.
+    """Record from the server microphone using webrtcvad (reference script logic).
+    Returns 16-bit 16kHz mono WAV bytes. Blocks until speech ends or timeout.
     """
+    global _server_mic_rms
     frame_samples  = int(_VAD_RATE * _VAD_FRAME_MS / 1000)
     silence_frames = max(1, int(_VAD_SILENCE_MS / _VAD_FRAME_MS))
     pre_frames     = max(1, int(_VAD_PRE_MS      / _VAD_FRAME_MS))
     max_frames_n   = int(_VAD_MAX_MS / _VAD_FRAME_MS)
 
-    vad             = webrtcvad.Vad(_VAD_AGGRESSIVENESS)
+    vad         = webrtcvad.Vad(_VAD_AGGRESSIVENESS)
     audio_q: queue.Queue[np.ndarray] = queue.Queue()
-    recorded:  list[np.ndarray] = []
+    recorded: list[np.ndarray] = []
     ring        = collections.deque(maxlen=pre_frames)
     silence_run = 0
     triggered   = False
     _server_mic_stop.clear()
+    _server_mic_rms = 0.0
 
-    def _cb(indata: np.ndarray, _frames, _time, status):
+    def _cb(indata: np.ndarray, _frames, _time, _status):
         audio_q.put(indata.copy())
 
-    with sd.InputStream(
+    stream_kwargs: dict = dict(
         samplerate=_VAD_RATE,
         channels=1,
         dtype="int16",
         blocksize=frame_samples,
         callback=_cb,
-    ):
+    )
+    if _MIC_DEVICE is not None:
+        stream_kwargs["device"] = _MIC_DEVICE
+
+    with sd.InputStream(**stream_kwargs):
         total = 0
         while not _server_mic_stop.is_set():
             block = audio_q.get().reshape(-1)
             total += 1
-            pcm   = block.tobytes()
-            rms   = float(np.sqrt(np.mean(block.astype(np.float32) ** 2)) / 32768.0)
+            pcm = block.tobytes()
+            rms = float(np.sqrt(np.mean(block.astype(np.float32) ** 2)) / 32768.0)
+            _server_mic_rms = rms   # expose to async level-update loop
 
             try:
-                is_speech = rms > 0.003 and vad.is_speech(pcm, _VAD_RATE)
+                is_speech = rms > 0.002 and vad.is_speech(pcm, _VAD_RATE)
             except Exception:
-                is_speech = rms > 0.003
+                is_speech = rms > 0.002
 
             if not triggered:
                 ring.append(block)
@@ -212,14 +223,18 @@ def capture_server_mic() -> bytes:
             if silence_run >= silence_frames or total >= max_frames_n:
                 break
 
+    _server_mic_rms = 0.0
     if not recorded:
         return b""
 
     frames = np.concatenate(recorded, axis=0)
-    buf    = io.BytesIO()
-    with sf.SoundFile(buf, mode="w", samplerate=_VAD_RATE,
-                      channels=1, format="WAV") as wav:
-        wav.write(frames)
+    # Use Python's wave module — explicit 16-bit PCM, no subtype ambiguity
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)          # 16-bit PCM
+        wf.setframerate(_VAD_RATE)
+        wf.writeframes(frames.tobytes())
     buf.seek(0)
     return buf.getvalue()
 
@@ -239,6 +254,24 @@ def index():
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+@app.get("/api/audio-devices")
+def list_audio_devices():
+    """List available audio input devices on the server.
+    Use this to find the right MAYA_MIC_DEVICE index for the Smart Mirror.
+    """
+    devices = sd.query_devices()
+    inputs  = [
+        {"index": i, "name": d["name"], "channels": d["max_input_channels"],
+         "default_sr": int(d["default_samplerate"])}
+        for i, d in enumerate(devices)
+        if d["max_input_channels"] > 0
+    ]
+    default_idx = sd.default.device[0] if isinstance(sd.default.device, (list, tuple)) \
+                  else sd.default.device
+    return {"input_devices": inputs, "current_default": default_idx,
+            "MAYA_MIC_DEVICE": _MIC_DEVICE}
 
 
 _LOGO_PATH     = Path(__file__).parent / "MAYA logo - Option 3.jpg"
@@ -325,8 +358,16 @@ async def chat_ws(ws: WebSocket):
             if msg["type"] == "tap":
                 # ── Server-side mic (Smart Mirror / Linux) ─────────────────
                 await send({"type": "listening"})
+
+                # Run blocking capture in executor while streaming live RMS
+                # to the browser so the level bar animates during recording
+                rec_future = loop.run_in_executor(None, capture_server_mic)
                 try:
-                    wav_bytes = await loop.run_in_executor(None, capture_server_mic)
+                    while not rec_future.done():
+                        await asyncio.sleep(0.08)
+                        await send({"type": "level",
+                                    "value": round(_server_mic_rms * 900, 1)})
+                    wav_bytes = await rec_future
                 except Exception as mic_exc:
                     await send({"type": "error", "text": f"Microphone error: {mic_exc}"})
                     continue
@@ -943,8 +984,9 @@ function buildWav(pcm16, rate) {
 function handleMessage(evt) {
   const msg = JSON.parse(evt.data);
   switch (msg.type) {
-    case 'listening':  setState(STATES.LISTENING); break;   // server mic started
-    case 'transcript': showTranscript(msg.text); break;
+    case 'listening':  setState(STATES.LISTENING); break;
+    case 'level':      levelFill.style.width = Math.min(100, msg.value) + '%'; break;
+    case 'transcript': showTranscript(msg.text); levelFill.style.width = '0%'; break;
     case 'thinking':   setState(STATES.THINKING); break;
     case 'response':   showResponse(msg.text); setState(STATES.IDLE); break;
     case 'speaking':   setState(STATES.SPEAKING); break;
@@ -962,9 +1004,7 @@ const SERVER_MIC = _params.get('mic') === 'server'  ? true
                  : _params.get('mic') === 'browser' ? false
                  : _isLinux;   // auto: Linux → server mic, everything else → browser mic
 
-if (SERVER_MIC) {
-  document.getElementById('level-bar').style.display = 'none';
-}
+// Level bar always visible — server streams RMS updates in server-mic mode
 
 // Small badge (bottom-right) shows which mode is active
 const _badge = document.createElement('div');
