@@ -62,31 +62,38 @@ def _make_speech_config() -> speechsdk.SpeechConfig:
 
 
 def transcribe_wav_bytes(wav_bytes: bytes) -> str:
-    """Transcribe raw WAV bytes using Azure Speech SDK. Returns transcript string."""
+    """Transcribe WAV bytes via Azure Speech SDK.
+
+    Uses a temp file so Azure can read the WAV header itself — more reliable
+    than PushAudioInputStream for server-captured audio.
+    Raises RuntimeError if Azure cancels (auth/network issue).
+    Returns "" on NoMatch (audio received but no speech found).
+    """
+    import tempfile, os as _os
+
     cfg = _make_speech_config()
 
-    # Parse WAV header to get sample rate and bit depth
-    with wave.open(io.BytesIO(wav_bytes)) as wf:
-        sample_rate  = wf.getframerate()
-        bits         = wf.getsampwidth() * 8
-        channels     = wf.getnchannels()
-        pcm_bytes    = wf.readframes(wf.getnframes())
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+        f.write(wav_bytes)
+        tmp = f.name
 
-    fmt = speechsdk.audio.AudioStreamFormat(
-        samples_per_second=sample_rate,
-        bits_per_sample=bits,
-        channels=channels,
-    )
-    push_stream = speechsdk.audio.PushAudioInputStream(fmt)
-    audio_cfg   = speechsdk.audio.AudioConfig(stream=push_stream)
-    recognizer  = speechsdk.SpeechRecognizer(speech_config=cfg, audio_config=audio_cfg)
+    try:
+        audio_cfg  = speechsdk.audio.AudioConfig(filename=tmp)
+        recognizer = speechsdk.SpeechRecognizer(speech_config=cfg,
+                                                audio_config=audio_cfg)
+        result     = recognizer.recognize_once()
+    finally:
+        _os.unlink(tmp)
 
-    push_stream.write(pcm_bytes)
-    push_stream.close()
-
-    result = recognizer.recognize_once()
     if result.reason == speechsdk.ResultReason.RecognizedSpeech:
         return result.text.strip()
+
+    if result.reason == speechsdk.ResultReason.Canceled:
+        det = speechsdk.CancellationDetails.from_result(result)
+        # Raise so the caller sends the real error to the browser
+        raise RuntimeError(f"Azure ASR cancelled — {det.reason}: {det.error_details}")
+
+    # NoMatch: audio reached Azure but no speech detected in it
     return ""
 
 
