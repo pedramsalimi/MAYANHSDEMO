@@ -614,26 +614,25 @@ function showResponse(t) {
   response.classList.add('visible');
 }
 
-// ── Audio capture — ScriptProcessorNode (raw PCM, no WebM involved) ────────
-// VAD settings match the reference script (.env values)
+// ── Audio capture ────────────────────────────────────────────────────────────
 const SAMPLE_RATE    = 16000;
-const BLOCK_SIZE     = 512;    // 32ms per block — finer VAD granularity
-const RMS_THRESH     = 0.003;  // low threshold; works for far-field mirror mics
-const SILENCE_MS     = 700;    // MAYA_VAD_SILENCE_MS
-const PRE_ROLL_MS    = 400;    // MAYA_VAD_PRE_MS — keep audio BEFORE speech onset
+const BLOCK_SIZE     = 512;
+const SILENCE_MS     = 800;
 const MAX_SEC        = 20;
-
-const BLOCK_MS       = BLOCK_SIZE / SAMPLE_RATE * 1000;   // ms per block
-const SILENCE_BLOCKS = Math.ceil(SILENCE_MS  / BLOCK_MS);
-const PRE_ROLL_BLOCKS= Math.ceil(PRE_ROLL_MS / BLOCK_MS); // ~12 blocks = 384ms
+const BLOCK_MS       = BLOCK_SIZE / SAMPLE_RATE * 1000;          // 32 ms
+const SILENCE_BLOCKS = Math.ceil(SILENCE_MS / BLOCK_MS);         // ~25
+const MIN_BLOCKS     = Math.ceil(600        / BLOCK_MS);         // 600ms min before silence stops
 const MAX_BLOCKS     = Math.ceil(MAX_SEC * 1000 / BLOCK_MS);
+
+// Silence threshold — used ONLY for auto-stop, not for gating collection.
+// All audio is recorded from the first tap so nothing gets clipped.
+const SILENCE_THRESH = 0.003;
 
 let gCtx         = null;
 let scriptProc   = null;
 let _micStream   = null;
 let pcmChunks    = [];
-let preRollBuf   = [];   // ring buffer — stores last PRE_ROLL_BLOCKS before speech
-let hasVoice     = false;
+let peakRms      = 0;      // for diagnostics
 let silenceCount = 0;
 let totalBlocks  = 0;
 
@@ -653,7 +652,7 @@ document.addEventListener('visibilitychange', () => {
   if (!document.hidden) _ensureCtxRunning();
 });
 
-// ── Persistent mic stream — request once, reuse forever ────────────────────
+// ── Mic stream — raw audio, no browser processing that can silently zero out ─
 async function _getMicStream() {
   if (_micStream) {
     const track = _micStream.getAudioTracks()[0];
@@ -661,11 +660,17 @@ async function _getMicStream() {
     _micStream.getTracks().forEach(t => t.stop());
     _micStream = null;
   }
-  // autoGainControl normalises far-field / quiet microphones automatically
-  _micStream = await navigator.mediaDevices.getUserMedia({
-    audio: { autoGainControl: true, echoCancellation: true, noiseSuppression: true },
-    video: false,
-  });
+  // Request raw audio first — browser processing pipelines can produce zeros
+  // in createMediaStreamSource on some Chromium/Linux builds
+  try {
+    _micStream = await navigator.mediaDevices.getUserMedia({
+      audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false },
+      video: false,
+    });
+  } catch(_) {
+    // Fallback: let browser choose processing
+    _micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+  }
   return _micStream;
 }
 
@@ -681,8 +686,7 @@ async function startRecording() {
   }
 
   pcmChunks    = [];
-  preRollBuf   = [];
-  hasVoice     = false;
+  peakRms      = 0;
   silenceCount = 0;
   totalBlocks  = 0;
 
@@ -702,33 +706,23 @@ async function startRecording() {
     const data = e.inputBuffer.getChannelData(0);
     totalBlocks++;
 
-    // RMS energy
+    // RMS
     let sum = 0;
     for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
     const rms = Math.sqrt(sum / data.length);
+    if (rms > peakRms) peakRms = rms;
+
+    // Level bar — collect ALL audio (no threshold gate, no clipping)
     levelFill.style.width = Math.min(100, rms * 900) + '%';
+    pcmChunks.push(new Float32Array(data));
 
-    if (rms >= RMS_THRESH) {
-      if (!hasVoice) {
-        // Speech onset — flush the pre-roll ring buffer first so we don't
-        // clip the beginning of the utterance (matches MAYA_VAD_PRE_MS=400)
-        hasVoice = true;
-        for (const b of preRollBuf) pcmChunks.push(b);
-        preRollBuf = [];
+    // Silence-based auto-stop (only kicks in after minimum recording time)
+    if (totalBlocks >= MIN_BLOCKS) {
+      if (rms < SILENCE_THRESH) silenceCount++;
+      else                      silenceCount = 0;
+      if (silenceCount >= SILENCE_BLOCKS || totalBlocks >= MAX_BLOCKS) {
+        finishRecording();
       }
-      silenceCount = 0;
-    } else if (hasVoice) {
-      silenceCount++;
-    } else {
-      // Pre-speech: maintain a rolling 400ms buffer
-      preRollBuf.push(new Float32Array(data));
-      if (preRollBuf.length > PRE_ROLL_BLOCKS) preRollBuf.shift();
-    }
-
-    if (hasVoice) pcmChunks.push(new Float32Array(data));
-
-    if ((hasVoice && silenceCount >= SILENCE_BLOCKS) || totalBlocks >= MAX_BLOCKS) {
-      finishRecording();
     }
   };
 
@@ -749,10 +743,20 @@ function processAndSend() {
   setState(STATES.THINKING);
 
   if (pcmChunks.length === 0) {
-    showResponse('⚠ No speech detected — tap and speak clearly into the mic.');
+    showResponse(`⚠ No audio captured (peak RMS: ${peakRms.toFixed(5)}). Check mic permissions.`);
     setState(STATES.IDLE);
     return;
   }
+
+  // Trim leading silence (first 200ms of silence before any signal)
+  const trimBlocks = Math.ceil(200 / BLOCK_MS);
+  let firstSignal  = 0;
+  for (let i = 0; i < Math.min(trimBlocks * 4, pcmChunks.length); i++) {
+    let s = 0;
+    for (let j = 0; j < pcmChunks[i].length; j++) s += pcmChunks[i][j] * pcmChunks[i][j];
+    if (Math.sqrt(s / pcmChunks[i].length) > 0.0005) { firstSignal = Math.max(0, i - 2); break; }
+  }
+  if (firstSignal > 0) pcmChunks = pcmChunks.slice(firstSignal);
 
   // Concatenate captured Float32 chunks
   const totalLen = pcmChunks.reduce((s, c) => s + c.length, 0);
