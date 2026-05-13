@@ -1,0 +1,219 @@
+{
+  "persona": {
+    "name": "Pedram",
+    "age": 42,
+    "gender": "male",
+    "condition": "frozen left shoulder, slightly elevated blood pressure, mild left knee pain",
+    "notes": "Frozen shoulder limits left arm range of motion \u2014 any left shoulder/arm movement is an achievement. Avoid framing blood pressure in exercise context unless directly relevant. Left knee may restrict leg lifts and squats."
+  },
+  "sessions": [
+    {
+      "id": "2026-05-11_152858",
+      "date": "2026-05-11",
+      "day_of_week": "Monday",
+      "exercise_name": "Shoulder and Hip Mobility Routine",
+      "session_file": "session_20260511_152759_e227c8ef.json",
+      "total_frames": 0,
+      "angle_threshold": 25,
+      "joint_stats": {
+        "right_shoulder": {
+          "bad_pct": 12.5,
+          "mean_diff": -1.8,
+          "max_abs_diff": 149
+        },
+        "right_arm": {
+          "bad_pct": 20.0,
+          "mean_diff": -6.5,
+          "max_abs_diff": 143
+        },
+        "left_shoulder": {
+          "bad_pct": 6.2,
+          "mean_diff": -5.1,
+          "max_abs_diff": 168
+        },
+        "left_arm": {
+          "bad_pct": 18.8,
+          "mean_diff": -6.0,
+          "max_abs_diff": 178
+        },
+        "right_hip": {
+          "bad_pct": 5.0,
+          "mean_diff": -6.1,
+          "max_abs_diff": 105
+        },
+        "right_leg": {
+          "bad_pct": 80.0,
+          "mean_diff": -14.8,
+          "max_abs_diff": 222
+        },
+        "left_hip": {
+          "bad_pct": 5.0,
+          "mean_diff": -4.0,
+          "max_abs_diff": 109
+        },
+        "left_leg": {
+          "bad_pct": 81.2,
+          "mean_diff": 14.6,
+          "max_abs_diff": 176
+        }
+      },
+      "feedback_given": "Great job today, Pedram! Your left shoulder showed a low bad percentage of 6.2%, which is a wonderful achievement given your condition. The right hip also performed well with just 5% bad. The left leg and right leg had higher bad percentages at 81.2% and 80% respectively, which is understandable considering your knee pain. Remember, any movement is progress, and you did great today! Keep it up!"
+    },
+    {
+      "id": "2026-05-11_165322",
+      "date": "2026-05-11",
+      "day_of_week": "Monday",
+      "exercise_name": "Shoulder and Hip Mobility Routine",
+      "session_file": "session_20260511_162937_a12184c0.json",
+      "total_frames": 398,
+      "angle_threshold": 25,
+      "joint_stats": {
+        "right_shoulder": {
+          "bad_pct": 22.5,
+          "mean_diff": -8.0,
+          "max_abs_diff": 141
+        },
+        "right_arm": {
+          "bad_pct": 13.8,
+          "mean_diff": -11.0,
+          "max_abs_diff": 149
+        },
+        "left_shoulder": {
+          "bad_pct": 26.2,
+          "mean_diff": -8.8,
+          "max_abs_diff": 170
+        },
+        "left_arm": {
+          "bad_pct": 21.2,
+          "mean_diff": -14.6,
+          "max_abs_diff": 184
+        },
+        "right_hip": {
+          "bad_pct": 7.5,
+          "mean_diff": -9.4,
+          "max_abs_diff": 111
+        },
+        "right_leg": {
+          "bad_pct": 70.0,
+          "mean_diff": 32.0,
+          "max_abs_diff": 171
+        },
+        "left_hip": {
+          "bad_pct": 7.5,
+          "mean_diff": -8.8,
+          "max_abs_diff": 96
+        },
+        "left_leg": {
+          "bad_pct": 81.2,
+          "mean_diff": 63.0,
+          "max_abs_diff": 188
+        }
+      },
+      "feedback_given": "Pedram, you did a great job today! Your right shoulder and right hip showed strong performance with bad percentages of 22.5% and 7.5% respectively. I know the left shoulder and left leg are still challenging, with bad percentages of 26.2% and 81.2%, but any movement is a step forward. Comparing to your last session, your right shoulder improved from 12.5% to 22.5%, and your left shoulder went from 6.2% to 26.2%. Keep celebrating those small victories, and remember that progress takes time!"
+    },
+    {
+      "id": "2026-05-11_165545",
+      "date": "2026-05-11",
+      "day_of_week": "Monday",
+      "exercise_name": "Shoulder and Hip Mobility Routine",
+      "session_file": "session_20260511_162937_a12184c0.json",
+      "total_frames": 398,
+      "angle_threshold": 25,
+      "joint_stats": {
+        "right_shoulder": {
+          "bad_pct": 22.5,
+          "mean_diff": -8.0,
+          "max_abs_diff": 141
+        },
+        "right_arm": {
+          "bad_pct": 13.8,
+          "mean_diff": -11.0,
+          "max_abs_diff": 149
+        },
+        "left_shoulder": {
+          "bad_pct": 26.2,
+          "mean_diff": -8.8,
+          "max_abs_diff": 170
+        },
+        "left_arm": {
+          "bad_pct": 21.2,
+          "mean_diff": -14.6,
+          "max_abs_diff": 184
+        },
+        "right_hip": {
+          "bad_pct": 7.5,
+          "mean_diff": -9.4,
+          "max_abs_diff": 111
+        },
+        "right_leg": {
+          "bad_pct": 70.0,
+          "mean_diff": 32.0,
+          "max_abs_diff": 171
+        },
+        "left_hip": {
+          "bad_pct": 7.5,
+          "mean_diff": -8.8,
+          "max_abs_diff": 96
+        },
+        "left_leg": {
+          "bad_pct": 81.2,
+          "mean_diff": 63.0,
+          "max_abs_diff": 188
+        }
+      },
+      "feedback_given": "Pedram, you did a great job today! Your right hip showed strong performance with a low bad percentage of 7.5%, which is fantastic. The right shoulder and right arm also performed well, with bad percentages of 22.5% and 13.8% respectively. I know the left shoulder and left leg are still challenging, with bad percentages of 26.2% and 81.2%, but any movement is a step forward. Comparing to your last session, your left shoulder went from 6.2% to 26.2%, which shows that you're still working hard. Keep celebrating those small victories, and remember that progress takes time!"
+    },
+    {
+      "id": "2026-05-11_170054",
+      "date": "2026-05-11",
+      "day_of_week": "Monday",
+      "exercise_name": "Shoulder and Hip Mobility Routine",
+      "session_file": "session_20260511_170000_1e4e9e8a.json",
+      "total_frames": 398,
+      "angle_threshold": 25,
+      "joint_stats": {
+        "right_shoulder": {
+          "bad_pct": 3.8,
+          "mean_diff": 5.3,
+          "max_abs_diff": 71
+        },
+        "right_arm": {
+          "bad_pct": 11.2,
+          "mean_diff": -1.8,
+          "max_abs_diff": 80
+        },
+        "left_shoulder": {
+          "bad_pct": 8.8,
+          "mean_diff": 6.6,
+          "max_abs_diff": 87
+        },
+        "left_arm": {
+          "bad_pct": 20.0,
+          "mean_diff": -3.7,
+          "max_abs_diff": 57
+        },
+        "right_hip": {
+          "bad_pct": 0.0,
+          "mean_diff": 0.6,
+          "max_abs_diff": 9
+        },
+        "right_leg": {
+          "bad_pct": 1.2,
+          "mean_diff": 1.0,
+          "max_abs_diff": 153
+        },
+        "left_hip": {
+          "bad_pct": 0.0,
+          "mean_diff": -2.7,
+          "max_abs_diff": 20
+        },
+        "left_leg": {
+          "bad_pct": 2.5,
+          "mean_diff": 1.5,
+          "max_abs_diff": 63
+        }
+      },
+      "feedback_given": "Pedram, you did a great job today! Your right hip showed strong performance with a low bad percentage of 0%, which is fantastic. The left hip also performed well with 0% bad. I know the left arm and left shoulder are still challenging, with bad percentages of 20% and 8.8% respectively, but any movement is a step forward. Comparing to your last session, your left shoulder improved from 6.2% to 8.8%, which shows that you're still working hard. Keep celebrating those small victories, and remember that progress takes time!"
+    }
+  ]
+}

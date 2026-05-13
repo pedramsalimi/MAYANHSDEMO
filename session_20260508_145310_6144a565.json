@@ -1,0 +1,3260 @@
+{
+  "meta": {
+    "total_frames": 397,
+    "ok_frames": 116,
+    "ok_pct": 29.2,
+    "angle_threshold": 25
+  },
+  "joint_stats": {
+    "right_shoulder": {
+      "bad_frames": 11,
+      "bad_pct": 13.8,
+      "mean_diff": 1.8,
+      "max_abs_diff": 80
+    },
+    "right_arm": {
+      "bad_frames": 6,
+      "bad_pct": 7.5,
+      "mean_diff": 2.8,
+      "max_abs_diff": 63
+    },
+    "left_shoulder": {
+      "bad_frames": 29,
+      "bad_pct": 36.2,
+      "mean_diff": 9.5,
+      "max_abs_diff": 84
+    },
+    "left_arm": {
+      "bad_frames": 22,
+      "bad_pct": 27.5,
+      "mean_diff": 1.8,
+      "max_abs_diff": 121
+    },
+    "right_hip": {
+      "bad_frames": 8,
+      "bad_pct": 10.0,
+      "mean_diff": -9.2,
+      "max_abs_diff": 158
+    },
+    "right_leg": {
+      "bad_frames": 6,
+      "bad_pct": 7.5,
+      "mean_diff": 2.9,
+      "max_abs_diff": 164
+    },
+    "left_hip": {
+      "bad_frames": 5,
+      "bad_pct": 6.2,
+      "mean_diff": 3.6,
+      "max_abs_diff": 78
+    },
+    "left_leg": {
+      "bad_frames": 11,
+      "bad_pct": 13.8,
+      "mean_diff": 7.0,
+      "max_abs_diff": 103
+    }
+  },
+  "frames": [
+    {
+      "patient_frame": 0,
+      "instructor_frame": 59,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -23,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -114,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -79,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": -26,
+          "status": "BAD"
+        },
+        "left_hip": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 70,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 5,
+      "instructor_frame": 1867,
+      "mirrored": true,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -12,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -9,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -77,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": -62,
+          "status": "BAD"
+        },
+        "left_leg": {
+          "diff": 9,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 10,
+      "instructor_frame": 188,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 89,
+          "status": "BAD"
+        },
+        "left_hip": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 72,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 15,
+      "instructor_frame": 1867,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 164,
+          "status": "BAD"
+        },
+        "left_hip": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 57,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 20,
+      "instructor_frame": 1872,
+      "mirrored": true,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 69,
+          "status": "BAD"
+        },
+        "left_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 103,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 25,
+      "instructor_frame": 1875,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 43,
+          "status": "BAD"
+        },
+        "left_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -69,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 30,
+      "instructor_frame": 1875,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 25,
+          "status": "BAD"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -16,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 35,
+      "instructor_frame": 83,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -8,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 40,
+      "instructor_frame": 1873,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -12,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 45,
+      "instructor_frame": 294,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 14,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -9,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 6,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 50,
+      "instructor_frame": 1791,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 80,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": 21,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 5,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 55,
+      "instructor_frame": 1791,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 55,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": 42,
+          "status": "BAD"
+        },
+        "left_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -7,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 6,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 60,
+      "instructor_frame": 272,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -10,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 3,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 65,
+      "instructor_frame": 1280,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -49,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": 63,
+          "status": "BAD"
+        },
+        "left_shoulder": {
+          "diff": 70,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 16,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -7,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 70,
+      "instructor_frame": 63,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 64,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": 15,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -17,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 75,
+      "instructor_frame": 1860,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 42,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -33,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -5,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 80,
+      "instructor_frame": 0,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 34,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": -19,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 0,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 85,
+      "instructor_frame": 1,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 29,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 13,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -10,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 90,
+      "instructor_frame": 267,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -15,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 14,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -19,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 24,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 95,
+      "instructor_frame": 796,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -71,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -125,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": -22,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 26,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 100,
+      "instructor_frame": 0,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 34,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -22,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 105,
+      "instructor_frame": 1861,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 21,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 49,
+          "status": "BAD"
+        },
+        "left_shoulder": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -32,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -7,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 110,
+      "instructor_frame": 1492,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 48,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -4,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 115,
+      "instructor_frame": 43,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -8,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -19,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -7,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 120,
+      "instructor_frame": 1308,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 38,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -10,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 125,
+      "instructor_frame": 0,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 13,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 37,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -20,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 130,
+      "instructor_frame": 594,
+      "mirrored": true,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -17,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 13,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 22,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 135,
+      "instructor_frame": 226,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 25,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -30,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 13,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 15,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 25,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 140,
+      "instructor_frame": 344,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 30,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 22,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 22,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 29,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 145,
+      "instructor_frame": 226,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 14,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 20,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -25,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 16,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 23,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 150,
+      "instructor_frame": 294,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 14,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -34,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 13,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 155,
+      "instructor_frame": 238,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 19,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -18,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 22,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 160,
+      "instructor_frame": 670,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -7,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -5,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 165,
+      "instructor_frame": 660,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 52,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -9,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 170,
+      "instructor_frame": 1558,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 49,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -9,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 175,
+      "instructor_frame": 660,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 55,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -8,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 180,
+      "instructor_frame": 1204,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -15,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 29,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 30,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 185,
+      "instructor_frame": 1,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 21,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -12,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 1,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 190,
+      "instructor_frame": 1193,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -1,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 195,
+      "instructor_frame": 281,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 59,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -10,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -11,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 200,
+      "instructor_frame": 1558,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 66,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -4,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 205,
+      "instructor_frame": 660,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 54,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -13,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -10,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 210,
+      "instructor_frame": 895,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -6,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 215,
+      "instructor_frame": 1693,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -52,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -121,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 3,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 220,
+      "instructor_frame": 0,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 19,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -10,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 225,
+      "instructor_frame": 593,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -9,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -8,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 11,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 230,
+      "instructor_frame": 267,
+      "mirrored": true,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -16,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 37,
+          "status": "BAD"
+        },
+        "left_shoulder": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -23,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 12,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 235,
+      "instructor_frame": 267,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -45,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 31,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -10,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 20,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 240,
+      "instructor_frame": 267,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -37,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 21,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 22,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 245,
+      "instructor_frame": 593,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -10,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 10,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 250,
+      "instructor_frame": 238,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 21,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -15,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -41,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 41,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -3,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 255,
+      "instructor_frame": 274,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 33,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -7,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -4,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 260,
+      "instructor_frame": 660,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 27,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 63,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -12,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -8,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 265,
+      "instructor_frame": 1558,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 30,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 72,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -15,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -7,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 270,
+      "instructor_frame": 270,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -6,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -6,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 275,
+      "instructor_frame": 594,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -12,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 31,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 14,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 14,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 280,
+      "instructor_frame": 646,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 35,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -8,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 9,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 285,
+      "instructor_frame": 594,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -12,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 48,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 13,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 290,
+      "instructor_frame": 267,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -35,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 24,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 15,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 295,
+      "instructor_frame": 791,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -6,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -28,
+          "status": "BAD"
+        },
+        "left_shoulder": {
+          "diff": 35,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -140,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": -31,
+          "status": "BAD"
+        },
+        "left_leg": {
+          "diff": 31,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 300,
+      "instructor_frame": 646,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -22,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -24,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 16,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 22,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 20,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 28,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 305,
+      "instructor_frame": 1795,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 4,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 310,
+      "instructor_frame": 267,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 14,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -11,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -23,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 28,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -6,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -4,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 315,
+      "instructor_frame": 265,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -25,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 30,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -8,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -6,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 320,
+      "instructor_frame": 593,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -23,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -26,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -7,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -20,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 13,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 0,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 325,
+      "instructor_frame": 1561,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 48,
+          "status": "BAD"
+        },
+        "left_shoulder": {
+          "diff": 52,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -4,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -15,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -6,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 330,
+      "instructor_frame": 587,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 47,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 62,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -15,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -12,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 335,
+      "instructor_frame": 267,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 7,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 22,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 2,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 340,
+      "instructor_frame": 646,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 14,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 17,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -9,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 9,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 345,
+      "instructor_frame": 1695,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -84,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -95,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 1,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 350,
+      "instructor_frame": 1138,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -5,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 24,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 6,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 355,
+      "instructor_frame": 832,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 18,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 360,
+      "instructor_frame": 1769,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 13,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -7,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 55,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -158,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 20,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 365,
+      "instructor_frame": 966,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -28,
+          "status": "BAD"
+        },
+        "right_arm": {
+          "diff": 8,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 16,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 4,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 44,
+          "status": "BAD"
+        },
+        "left_leg": {
+          "diff": 31,
+          "status": "BAD"
+        }
+      }
+    },
+    {
+      "patient_frame": 370,
+      "instructor_frame": 224,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -16,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 9,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": -77,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": 12,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": -78,
+          "status": "BAD"
+        },
+        "left_leg": {
+          "diff": 17,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 375,
+      "instructor_frame": 238,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -23,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -10,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -20,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": 92,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -154,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": -1,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 16,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 380,
+      "instructor_frame": 238,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": -8,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -15,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": -31,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": 90,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": -129,
+          "status": "BAD"
+        },
+        "right_leg": {
+          "diff": 11,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": -28,
+          "status": "BAD"
+        },
+        "left_leg": {
+          "diff": 17,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 385,
+      "instructor_frame": 487,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": -12,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -16,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 10,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 5,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": 12,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 390,
+      "instructor_frame": 0,
+      "mirrored": false,
+      "all_ok": false,
+      "joints": {
+        "right_shoulder": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 26,
+          "status": "BAD"
+        },
+        "left_arm": {
+          "diff": -25,
+          "status": "BAD"
+        },
+        "right_hip": {
+          "diff": 3,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": -3,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -1,
+          "status": "OK"
+        }
+      }
+    },
+    {
+      "patient_frame": 395,
+      "instructor_frame": 1,
+      "mirrored": false,
+      "all_ok": true,
+      "joints": {
+        "right_shoulder": {
+          "diff": 1,
+          "status": "OK"
+        },
+        "right_arm": {
+          "diff": 6,
+          "status": "OK"
+        },
+        "left_shoulder": {
+          "diff": 19,
+          "status": "OK"
+        },
+        "left_arm": {
+          "diff": -16,
+          "status": "OK"
+        },
+        "right_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "right_leg": {
+          "diff": 0,
+          "status": "OK"
+        },
+        "left_hip": {
+          "diff": 2,
+          "status": "OK"
+        },
+        "left_leg": {
+          "diff": -3,
+          "status": "OK"
+        }
+      }
+    }
+  ]
+}

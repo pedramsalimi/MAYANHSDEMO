@@ -1,0 +1,26 @@
+[project]
+name = "smart-mirror-2026-code-yolo-app"
+version = "0.1.0"
+description = "MAYA — AI exercise coaching app for young cancer survivors"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    # Exercise tracking server
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.29.0",
+    "python-multipart>=0.0.9",
+    "ultralytics>=8.0.0",
+    "opencv-python>=4.8.0",
+    "pillow>=10.0.0",
+    "scipy>=1.11.0",
+    "websockets>=12.0",
+    # Voice coaching agent
+    "azure-cognitiveservices-speech>=1.49.1",
+    "sounddevice>=0.5.5",
+    "soundfile>=0.13.1",
+    "langchain>=1.0,<2.0",
+    "langchain-core>=1.0,<2.0",
+    "langchain-openai>=1.2.1",
+    "langgraph>=1.0,<2.0",
+    "langsmith>=0.3.0",
+]
