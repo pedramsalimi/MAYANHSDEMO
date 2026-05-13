@@ -15,15 +15,22 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import collections
 import io
 import json
 import os
+import queue
 import re
 import struct
+import threading
 import wave
 from pathlib import Path
 
 import azure.cognitiveservices.speech as speechsdk
+import numpy as np
+import sounddevice as sd
+import soundfile as sf
+import webrtcvad
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse, HTMLResponse
 
@@ -134,6 +141,90 @@ def speak_server_side(text: str) -> None:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Server-side microphone capture (for Linux / Smart Mirror)
+# Mirrors the reference MAYA script exactly: sounddevice + webrtcvad + pre-roll
+# ─────────────────────────────────────────────────────────────────────────────
+
+_VAD_RATE           = int(os.environ.get("MAYA_VOICE_SAMPLE_RATE", "16000"))
+_VAD_FRAME_MS       = int(os.environ.get("MAYA_VAD_FRAME_MS",       "30"))
+_VAD_AGGRESSIVENESS = int(os.environ.get("MAYA_VAD_AGGRESSIVENESS", "1"))
+_VAD_SILENCE_MS     = int(os.environ.get("MAYA_VAD_SILENCE_MS",     "700"))
+_VAD_PRE_MS         = int(os.environ.get("MAYA_VAD_PRE_MS",         "400"))
+_VAD_MAX_MS         = int(os.environ.get("MAYA_VAD_MAX_UTTERANCE_MS","20000"))
+
+# One global stop-event so the browser tap can abort an in-progress recording
+_server_mic_stop = threading.Event()
+
+
+def capture_server_mic() -> bytes:
+    """Record from the server's microphone using webrtcvad.
+
+    Identical logic to the reference MAYA script. Returns WAV bytes.
+    Blocks until end-of-speech is detected or max duration reached.
+    """
+    frame_samples  = int(_VAD_RATE * _VAD_FRAME_MS / 1000)
+    silence_frames = max(1, int(_VAD_SILENCE_MS / _VAD_FRAME_MS))
+    pre_frames     = max(1, int(_VAD_PRE_MS      / _VAD_FRAME_MS))
+    max_frames_n   = int(_VAD_MAX_MS / _VAD_FRAME_MS)
+
+    vad             = webrtcvad.Vad(_VAD_AGGRESSIVENESS)
+    audio_q: queue.Queue[np.ndarray] = queue.Queue()
+    recorded:  list[np.ndarray] = []
+    ring        = collections.deque(maxlen=pre_frames)
+    silence_run = 0
+    triggered   = False
+    _server_mic_stop.clear()
+
+    def _cb(indata: np.ndarray, _frames, _time, status):
+        audio_q.put(indata.copy())
+
+    with sd.InputStream(
+        samplerate=_VAD_RATE,
+        channels=1,
+        dtype="int16",
+        blocksize=frame_samples,
+        callback=_cb,
+    ):
+        total = 0
+        while not _server_mic_stop.is_set():
+            block = audio_q.get().reshape(-1)
+            total += 1
+            pcm   = block.tobytes()
+            rms   = float(np.sqrt(np.mean(block.astype(np.float32) ** 2)) / 32768.0)
+
+            try:
+                is_speech = rms > 0.003 and vad.is_speech(pcm, _VAD_RATE)
+            except Exception:
+                is_speech = rms > 0.003
+
+            if not triggered:
+                ring.append(block)
+                if is_speech:
+                    triggered = True
+                    recorded.extend(ring)
+                    ring.clear()
+                if total >= max_frames_n:
+                    break
+                continue
+
+            recorded.append(block)
+            silence_run = 0 if is_speech else silence_run + 1
+            if silence_run >= silence_frames or total >= max_frames_n:
+                break
+
+    if not recorded:
+        return b""
+
+    frames = np.concatenate(recorded, axis=0)
+    buf    = io.BytesIO()
+    with sf.SoundFile(buf, mode="w", samplerate=_VAD_RATE,
+                      channels=1, format="WAV") as wav:
+        wav.write(frames)
+    buf.seek(0)
+    return buf.getvalue()
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # FastAPI app
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -197,15 +288,19 @@ async def chat_ws(ws: WebSocket):
     """
     WebSocket protocol:
       Browser → Server:
-        {"type": "audio", "data": "<base64 WAV>"}   ← voice input
-        {"type": "text",  "text": "..."}             ← typed input
+        {"type": "audio",    "data": "<base64 WAV>"}  ← browser mic (laptop)
+        {"type": "text",     "text": "..."}            ← typed input
+        {"type": "tap"}                                ← server mic start (Smart Mirror)
+        {"type": "tap_stop"}                           ← abort server mic recording
 
       Server → Browser:
-        {"type": "transcript", "text": "..."}        ← what we heard
-        {"type": "thinking"}                         ← agent is processing
-        {"type": "response",   "text": "..."}        ← agent reply text
-        {"type": "audio",      "data": "<base64>"}   ← TTS audio (WAV)
-        {"type": "error",      "text": "..."}        ← something went wrong
+        {"type": "listening"}                          ← server mic is now recording
+        {"type": "transcript", "text": "..."}          ← what we heard
+        {"type": "thinking"}                           ← agent is processing
+        {"type": "response",   "text": "..."}          ← agent reply text
+        {"type": "speaking"}                           ← TTS playing server-side
+        {"type": "done"}                               ← TTS finished
+        {"type": "error",      "text": "..."}          ← something went wrong
     """
     await ws.accept()
 
@@ -222,18 +317,48 @@ async def chat_ws(ws: WebSocket):
             msg = json.loads(raw)
 
             # ── Decode user input ──────────────────────────────────────────
-            if msg["type"] == "audio":
+
+            if msg["type"] == "tap_stop":
+                _server_mic_stop.set()   # abort any in-progress server recording
+                continue
+
+            if msg["type"] == "tap":
+                # ── Server-side mic (Smart Mirror / Linux) ─────────────────
+                await send({"type": "listening"})
+                try:
+                    wav_bytes = await loop.run_in_executor(None, capture_server_mic)
+                except Exception as mic_exc:
+                    await send({"type": "error", "text": f"Microphone error: {mic_exc}"})
+                    continue
+
+                if not wav_bytes:
+                    await send({"type": "error", "text": "No speech detected — please speak after tapping."})
+                    continue
+
+                try:
+                    transcript = await loop.run_in_executor(None, transcribe_wav_bytes, wav_bytes)
+                except Exception as asr_exc:
+                    await send({"type": "error", "text": f"ASR error: {asr_exc}"})
+                    continue
+
+                if not transcript:
+                    await send({"type": "error", "text": "Could not recognise speech — please try again."})
+                    continue
+
+                user_text = transcript
+                await send({"type": "transcript", "text": user_text})
+
+            elif msg["type"] == "audio":
+                # ── Browser mic (laptop / desktop) ────────────────────────
                 wav_bytes = base64.b64decode(msg["data"])
                 try:
-                    transcript = await loop.run_in_executor(
-                        None, transcribe_wav_bytes, wav_bytes
-                    )
+                    transcript = await loop.run_in_executor(None, transcribe_wav_bytes, wav_bytes)
                 except Exception as asr_exc:
                     await send({"type": "error", "text": f"Could not process audio: {asr_exc}"})
                     continue
 
                 if not transcript:
-                    await send({"type": "error", "text": "No speech detected — try speaking a bit louder or closer to the mic."})
+                    await send({"type": "error", "text": "No speech detected — try speaking louder."})
                     continue
 
                 user_text = transcript
@@ -818,6 +943,7 @@ function buildWav(pcm16, rate) {
 function handleMessage(evt) {
   const msg = JSON.parse(evt.data);
   switch (msg.type) {
+    case 'listening':  setState(STATES.LISTENING); break;   // server mic started
     case 'transcript': showTranscript(msg.text); break;
     case 'thinking':   setState(STATES.THINKING); break;
     case 'response':   showResponse(msg.text); setState(STATES.IDLE); break;
@@ -827,9 +953,36 @@ function handleMessage(evt) {
   }
 }
 
+// ── Server-mic mode (Smart Mirror / Linux — use ?mic=server in URL) ────────
+const SERVER_MIC = new URLSearchParams(location.search).get('mic') === 'server';
+
+if (SERVER_MIC) {
+  // Hide the level bar — server handles VAD, not the browser
+  document.getElementById('level-bar').style.display = 'none';
+  // Show a small badge so operator knows which mode is active
+  const badge = document.createElement('div');
+  badge.textContent = 'Server mic';
+  badge.style.cssText = 'position:fixed;bottom:80px;right:18px;font-size:0.65rem;'
+    + 'color:rgba(100,180,255,0.4);letter-spacing:0.08em;text-transform:uppercase';
+  document.body.appendChild(badge);
+}
+
 // ── Circle tap ─────────────────────────────────────────────────────────────
 function onCircleTap() {
-  _ensureCtxRunning();   // already defined above, called during gesture
+  if (SERVER_MIC) {
+    if (state === STATES.IDLE) {
+      // Tell the server to start recording from its own microphone
+      ws.send(JSON.stringify({ type: 'tap' }));
+      setState(STATES.THINKING);   // waiting for server to start
+    } else if (state === STATES.LISTENING) {
+      // Let the user abort server recording
+      ws.send(JSON.stringify({ type: 'tap_stop' }));
+      setState(STATES.IDLE);
+    }
+    return;
+  }
+  // Browser mic mode (laptop / desktop)
+  _ensureCtxRunning();
   if      (state === STATES.IDLE)      startRecording();
   else if (state === STATES.LISTENING) finishRecording();
 }
